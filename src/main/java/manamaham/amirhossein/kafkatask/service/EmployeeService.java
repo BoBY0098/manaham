@@ -16,6 +16,12 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final TaskRepository taskRepository;
 
+    private static long counter = 0;
+
+    public static synchronized long generateNewId() {
+        return ++counter;
+    }
+
     public void saveEmployee(EmployeeReq req){
 
         Employee employee = new Employee();
@@ -27,11 +33,18 @@ public class EmployeeService {
         employee.setDueDate(req.getDueDate());
         employee.setSalary(req.getSalary());
 
+        employeeRepository.save(employee);
+
         for (TaskReq item : req.getTasks()) {
 
             Task task = new Task();
 
-            task.setId(item.getId());
+            if (item.getId() == null) {
+                task.setId(generateNewId());
+            } else {
+                task.setId(item.getId());
+            }
+
             task.setDescription(item.getDescription());
             task.setStatus(item.getStatus());
             task.setEmployee(employee);
@@ -39,6 +52,5 @@ public class EmployeeService {
 
             taskRepository.save(task);
         }
-        employeeRepository.save(employee);
     }
 }

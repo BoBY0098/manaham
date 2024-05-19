@@ -14,6 +14,4 @@ public class TaskReq {
     private String status;
 
     private Date dueDate;
-
-    private Long employeeId;
 }
