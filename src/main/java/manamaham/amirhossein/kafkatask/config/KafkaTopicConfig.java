@@ -12,4 +12,9 @@ public class KafkaTopicConfig {
     public NewTopic amirhosseinTopic(){
         return TopicBuilder.name("AMTopic").build();
     }
+
+    @Bean
+    public NewTopic AMTopicJson(){
+        return TopicBuilder.name("AMTopicJson").build();
+    }
 }
