@@ -1,7 +1,7 @@
 package manamaham.amirhossein.kafkatask.config;
 
 import lombok.RequiredArgsConstructor;
-import manamaham.amirhossein.kafkatask.entity.Employee;
+import manamaham.amirhossein.kafkatask.entity.EmployeeReq;
 import manamaham.amirhossein.kafkatask.kafka.JsonKafkaProducer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +17,10 @@ public class JsonMessageController {
     private final JsonKafkaProducer kafkaProducer;
 
     @PostMapping("/publish")
-    public ResponseEntity<String> publish(@RequestBody Employee employee){
-        kafkaProducer.sendMessage(employee);
+    public ResponseEntity<String> publish(@RequestBody EmployeeReq req){
+        kafkaProducer.sendMessage(req);
         ResponseEntity.BodyBuilder ok = ResponseEntity.ok();
-        return ok.body("JSON Message Sent To THe Topic");
+        return ok.body("JSON Req Model Sent To The Topic Successfully");
     }
 
 }

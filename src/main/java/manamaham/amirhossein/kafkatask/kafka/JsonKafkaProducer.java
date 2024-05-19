@@ -1,6 +1,7 @@
 package manamaham.amirhossein.kafkatask.kafka;
 
 import manamaham.amirhossein.kafkatask.entity.Employee;
+import manamaham.amirhossein.kafkatask.entity.EmployeeReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -20,12 +21,12 @@ public class JsonKafkaProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendMessage(Employee employee){
+    public void sendMessage(EmployeeReq req){
 
-        LOGGER.info(String.format("Message Sent => %s" , employee.toString()));
+        LOGGER.info(String.format("Message Sent => %s" , req.toString()));
 
-        Message<Employee> message = MessageBuilder
-                .withPayload(employee)
+        Message<EmployeeReq> message = MessageBuilder
+                .withPayload(req)
                 .setHeader(KafkaHeaders.TOPIC , "AMTopicJson")
                 .build();
 

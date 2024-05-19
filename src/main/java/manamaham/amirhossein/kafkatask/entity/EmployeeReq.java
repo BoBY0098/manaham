@@ -21,5 +21,5 @@ public class EmployeeReq {
 
     private Date dueDate;
 
-    List<TaskReq> reqList = new ArrayList<>();
+    List<TaskReq> tasks = new ArrayList<>();
 }
